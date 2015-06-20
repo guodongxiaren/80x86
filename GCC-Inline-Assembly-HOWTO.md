@@ -83,27 +83,27 @@ Thus, Intel "mov al, byte ptr foo" is "movb foo, %al" in AT&T syntax.
 
 ###  5. Memory Operands.
 In Intel syntax the base register is enclosed in `[` and `]` where as in AT&T they change to `(` and `)`. Additionally, in Intel syntax an indirect memory reference is like
+```asm
+section:[base + index*scale + disp]; which changes to
 
-section:[base + index*scale + disp], which changes to
-
-section:disp(base, index, scale) in AT&T.
-
+section:disp(base, index, scale) ; in AT&T.
+```
 One point to bear in mind is that, when a constant is used for disp/scale, `$` shouldn't be prefixed.
 
 Now we saw some of the major differences between Intel syntax and AT&T syntax. I've wrote only a few of them. For a complete information, refer to GNU Assembler documentations. Now we'll look at some examples for better understanding.
 
 |       Intel Code             |      AT&T Code                     |
 |------------------------------|------------------------------------|
-| mov     eax,1                |  movl    $1,%eax                   |   
-| mov     ebx,0ffh             |  movl    $0xff,%ebx                |   
-| int     80h                  |  int     $0x80                     |   
-| mov     ebx, eax             |  movl    %eax, %ebx                |
-| mov     eax,[ecx]            |  movl    (%ecx),%eax               |
-| mov     eax,[ebx+3]          |  movl    3(%ebx),%eax              | 
-| mov     eax,[ebx+20h]        |  movl    0x20(%ebx),%eax           |
-| add     eax,[ebx+ecx*2h]     |  addl    (%ebx,%ecx,0x2),%eax      |
-| lea     eax,[ebx+ecx]        |  leal    (%ebx,%ecx),%eax          |
-| sub     eax,[ebx+ecx*4h-20h] |  subl    -0x20(%ebx,%ecx,0x4),%eax |
+| mov　　　eax,1                |  movl　　　$1,%eax                   |   
+| mov　　　ebx,0ffh             |  movl　　　$0xff,%ebx                |   
+| int　　　80h                  |  int　　　 $0x80                     |   
+| mov　　　ebx, eax             |  movl　　　%eax, %ebx                |
+| mov　　　eax,[ecx]            |  movl　　　(%ecx),%eax               |
+| mov　　　eax,[ebx+3]          |  movl　　　3(%ebx),%eax              | 
+| mov　　　eax,[ebx+20h]        |  movl　　　0x20(%ebx),%eax           |
+| add　　　eax,[ebx+ecx*2h]     |  addl　　　(%ebx,%ecx,0x2),%eax      |
+| lea　　　eax,[ebx+ecx]        |  leal　　　(%ebx,%ecx),%eax          |
+| sub　　　eax,[ebx+ecx*4h-20h] |  subl　　　-0x20(%ebx,%ecx,0x4),%eax |
 
 ##4. Basic Inline.
 
