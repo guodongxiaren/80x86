@@ -1,18 +1,17 @@
------------------------------------------
 GCC-Inline-Assembly-HOWTO
 ===============================
-Sandeep.S [http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html](http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html)
+	Sandeep.S  
+	v0.1, 01 March 2003.
 
-v0.1, 01 March 2003.
 >
-This HOWTO explains the use and usage of the inline assembly feature provided by GCC. There are only two prerequisites for reading this article, and that's obviously a basic knowledge of x86 assembly language and C.
+This [**HOWTO**](http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html) explains the use and usage of the inline assembly feature provided by GCC. There are only two prerequisites for reading this article, and that's obviously a basic knowledge of x86 assembly language and C.
 
 1. Introduction.
 
-1.1 Copyright and License.
-1.2 Feedback and Corrections.
-1.3 Acknowledgments.
-2. Overview of the whole thing.
+1.1 Copyright and License.  
+1.2 Feedback and Corrections.  
+1.3 Acknowledgments.  
+2. Overview of the whole thing.  
 
 3. GCC Assembler Syntax.
 
@@ -20,15 +19,15 @@ This HOWTO explains the use and usage of the inline assembly feature provided by
 
 5. Extended Asm.
 
-5.1 Assembler Template.
-5.2 Operands.
-5.3 Clobber List.
-5.4 Volatile ...?
-6. More about constraints.
+5.1 Assembler Template.  
+5.2 Operands.  
+5.3 Clobber List.  
+5.4 Volatile ...?  
+6. More about constraints.  
 
-6.1 Commonly used constraints.
-6.2 Constraint Modifiers.
-7. Some Useful Recipes.
+6.1 Commonly used constraints.  
+6.2 Constraint Modifiers.  
+7. Some Useful Recipes.  
 
 8. Concluding Remarks.
 
@@ -70,27 +69,27 @@ Inline assembly is important primarily because of its ability to operate and mak
 
 ##3. GCC Assembler Syntax.
 
-GCC, the GNU C Compiler for Linux, uses AT&T/UNIX assembly syntax. Here we'll be using AT&T syntax for assembly coding. Don't worry if you are not familiar with AT&T syntax, I will teach you. This is quite different from Intel syntax. I shall give the major differences.
+GCC, the GNU C Compiler for Linux, uses **AT&T/UNIX** assembly syntax. Here we'll be using AT&T syntax for assembly coding. Don't worry if you are not familiar with AT&T syntax, I will teach you. This is quite different from Intel syntax. I shall give the major differences.
 
-####1. Source-Destination Ordering.
+###  1. Source-Destination Ordering.
 The direction of the operands in AT&T syntax is opposite to that of Intel. In Intel syntax the first operand is the destination, and the second operand is the source whereas in AT&T syntax the first operand is the source and the second operand is the destination. ie,
 
 "Op-code dst src" in Intel syntax changes to
 
 "Op-code src dst" in AT&T syntax.
 
-####2. Register Naming.
+###  2. Register Naming.
 Register names are prefixed by % ie, if eax is to be used, write %eax.
 
-####3. Immediate Operand.
+###  3. Immediate Operand.
 AT&T immediate operands are preceded by `$`. For static "C" variables also prefix a `$`. In Intel syntax, for hexadecimal constants an `h` is suffixed, instead of that, here we prefix `0x` to the constant. So, for hexadecimals, we first see a `$`, then `0x` and finally the constants.
 
-####4. Operand Size.
+###  4. Operand Size.
 In AT&T syntax the size of memory operands is determined from the last character of the op-code name. Op-code suffixes of `b`, `w`, and `l` specify byte(8-bit), word(16-bit), and long(32-bit) memory references. Intel syntax accomplishes this by prefixing memory operands (not the op-codes) with `byte ptr`, `word ptr`, and `dword ptr`.
 
 Thus, Intel "mov al, byte ptr foo" is "movb foo, %al" in AT&T syntax.
 
-####5. Memory Operands.
+###  5. Memory Operands.
 In Intel syntax the base register is enclosed in `[` and `]` where as in AT&T they change to `(` and `)`. Additionally, in Intel syntax an indirect memory reference is like
 
 section:[base + index*scale + disp], which changes to
