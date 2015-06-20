@@ -91,10 +91,9 @@ section:disp(base, index, scale) in AT&T.
 One point to bear in mind is that, when a constant is used for disp/scale, `$` shouldn't be prefixed.
 
 Now we saw some of the major differences between Intel syntax and AT&T syntax. I've wrote only a few of them. For a complete information, refer to GNU Assembler documentations. Now we'll look at some examples for better understanding.
-```
-+------------------------------+------------------------------------+
+
 |       Intel Code             |      AT&T Code                     |
-+------------------------------+------------------------------------+
+|------------------------------|------------------------------------|
 | mov     eax,1                |  movl    $1,%eax                   |   
 | mov     ebx,0ffh             |  movl    $0xff,%ebx                |   
 | int     80h                  |  int     $0x80                     |   
@@ -105,8 +104,7 @@ Now we saw some of the major differences between Intel syntax and AT&T syntax. I
 | add     eax,[ebx+ecx*2h]     |  addl    (%ebx,%ecx,0x2),%eax      |
 | lea     eax,[ebx+ecx]        |  leal    (%ebx,%ecx),%eax          |
 | sub     eax,[ebx+ecx*4h-20h] |  subl    -0x20(%ebx,%ecx,0x4),%eax |
-+------------------------------+------------------------------------+
-```
+
 ##4. Basic Inline.
 
 The format of basic inline assembly is very much straight forward. Its basic form is
@@ -254,30 +252,29 @@ By this time, you might have understood that constraints have got a lot to do wi
 
 There are a number of constraints of which only a few are used frequently. We'll have a look at those constraints.
 
-Register operand constraint(r)
+####Register operand constraint(r)
 When operands are specified using this constraint, they get stored in General Purpose Registers(GPR). Take the following example:
 ```c
 asm ("movl %%eax, %0\n" :"=r"(myval));
 ```
 Here the variable myval is kept in a register, the value in register eax is copied onto that register, and the value of myval is updated into the memory from this register. When the "r" constraint is specified, gcc may keep the variable in any of the available GPRs. To specify the register, you must directly specify the register names by using specific register constraints. They are:
-```
-+---+--------------------+
+
 | r |    Register(s)     |
-+---+--------------------+
+|:---:|--------------------|
 | a |   %eax, %ax, %al   |
 | b |   %ebx, %bx, %bl   |
 | c |   %ecx, %cx, %cl   |
 | d |   %edx, %dx, %dl   |
 | S |   %esi, %si        |
 | D |   %edi, %di        |
-+---+--------------------+
-```
-Memory operand constraint(m)
+
+
+####Memory operand constraint(m)
 When the operands are in the memory, any operations performed on them will occur directly in the memory location, as opposed to register constraints, which first store the value in a register to be modified and then write it back to the memory location. But register constraints are usually used only when they are absolutely necessary for an instruction or they significantly speed up the process. Memory constraints can be used most efficiently in cases where a C variable needs to be updated inside "asm" and you really don't want to use a register to hold its value. For example, the value of idtr is stored in the memory location loc:
 ```c
 asm("sidt %0\n" : :"m"(loc));
 ```
-Matching(Digit) constraints
+####Matching(Digit) constraints
 In some cases, a single variable may serve as both the input and the output operand. Such cases may be specified in "asm" by using matching constraints.
 ```c
 asm ("incl %0" :"=a"(var):"0"(var));

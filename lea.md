@@ -4,11 +4,11 @@ LEA
 ##指令格式
 ```asm
 ;Intel
-LEA DEST，SRC
+lea DEST，SRC
 ;AT&T
-LEAL SRC, DESC
-LEAW SRC, DESC
-LEAB SRC, DESC
+leal SRC, DESC
+leaw SRC, DESC
+leab SRC, DESC
 ```
 - SRC可以是除~~立即数~~和~~寄存器~~外的任一种存储器寻址方式。   
 - DESC可以是寄存器，但不能是~~段寄存器~~
