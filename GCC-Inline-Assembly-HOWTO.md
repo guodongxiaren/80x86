@@ -6,28 +6,24 @@ GCC-Inline-Assembly-HOWTO
 >
 This [**HOWTO**](http://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html) explains the use and usage of the inline assembly feature provided by GCC. There are only two prerequisites for reading this article, and that's obviously a basic knowledge of x86 assembly language and C.
 
-1. Introduction.
-- 1.1 Copyright and License.  
-- 1.2 Feedback and Corrections.  
-- 1.3 Acknowledgments.  
-
-2. Overview of the whole thing.  
-3. GCC Assembler Syntax.
-4. Basic Inline.
-
-5. Extended Asm.
-- 5.1 Assembler Template.  
-- 5.2 Operands.  
-- 5.3 Clobber List.  
-- 5.4 Volatile ...?  
-
-6. More about constraints.  
-- 6.1 Commonly used constraints.  
-- 6.2 Constraint Modifiers.  
-
-7. Some Useful Recipes.  
-8. Concluding Remarks.
-9. References.
+- 1. Introduction.
+	- 1.1 Copyright and License.  
+	- 1.2 Feedback and Corrections.  
+	- 1.3 Acknowledgments.  
+- 2. Overview of the whole thing.  
+- 3. GCC Assembler Syntax.
+- 4. Basic Inline.
+- 5. Extended Asm.
+	- 5.1 Assembler Template.  
+	- 5.2 Operands.  
+	- 5.3 Clobber List.  
+	- 5.4 Volatile ...?  
+- 6. More about constraints.  
+	- 6.1 Commonly used constraints.  
+	- 6.2 Constraint Modifiers.  
+- 7. Some Useful Recipes.  
+- 8. Concluding Remarks.
+- 9. References.
 
 ##1. Introduction.
 
